@@ -8,7 +8,6 @@ require 'lib/hast/verifier'
 
 class Hast
   NAME = "HAST - Hosting Account Status Tool"
-  VERSION = "0.1.0"
 
   attr_reader :config
 
@@ -36,7 +35,9 @@ class Hast
   end
 
   def output_version
-    puts "#{NAME} v#{VERSION}"
+    version = nil
+    File.open('VERSION') { |f| version = f.gets }
+    puts "#{NAME} v#{version}"
   end
 
   def output_help
