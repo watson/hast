@@ -1,0 +1,68 @@
+# = HAST
+#
+#   HAST stands for 'Hosting Account Status Tool'.
+#
+#   HAST is a tool for fetching domains from Apache configuration files and
+#   from the Postfix database on a hosting server environment. It will then
+#   run a report, checking the DNS records for each domain to see if they
+#   match your server.
+#
+#   This is important for finding "dead" domains where the domain either
+#   doesn't exist anymore or where the owner have moved it to another
+#   hosting provider.
+#
+#   Before you can use HAST, you need to setup a config.yml file. Use
+#   config.yml.example as a template.
+#
+# == Note on Patches/Pull Requests
+#
+#   * Fork the project.
+#   * Make your feature addition or bug fix.
+#   * Add tests for it. This is important so I don't break it in a future
+#     version unintentionally.
+#   * Commit, do not mess with rakefile, version, or history.
+#     (if you want to have your own version, that is fine but bump version
+#     in a commit by itself I can ignore when I pull)
+#   * Send me a pull request. Bonus points for topic branches.
+#
+# == Gem requirements
+#
+#   * mysql
+#   * net-dns
+#
+# == Usage 
+#
+#   hast [options]
+#
+#   For help use: hast -h
+#
+# == Options
+#
+#   -h, --help                Displays help message
+#   -v, --version             Display the version, then exit
+#   -q, --no-dns              Do not lookup any domain names or MX records
+#   -y, --yaml                Output as YAML (usefull if you want to 
+#                             'bau.rb > domains.yml')
+#   -c, --domain-cache FILE   Get the domains from a YAML file
+#
+# == Examples
+#
+#   Generate a human-readable report:
+#     ruby hast.rb
+#
+#   Do not perfom DNS lookups:
+#     ruby hast.rb -q
+#
+#   Do not perfom DNS lookups and genereate a YAML file with the result:
+#     ruby hast.rb -yq > domains.yml
+#
+#   Load the domains to check from a YAML file:
+#     ruby hast.rb -c domains.yml
+#
+# == Copyright
+#
+#   Copyright (c) 2010 Thomas Watson Steen. See LICENSE for details.
+#
+
+require 'lib/hast'
+Hast.new
