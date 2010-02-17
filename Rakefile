@@ -24,9 +24,9 @@ begin
     gem.email = "w@tson.dk"
     gem.homepage = "http://github.com/watson/hast"
     gem.authors = ["Thomas Watson Steen"]
-    gem.add_development_dependency "mysql", ">= 0"
-    gem.add_development_dependency "net-dns", ">= 0"
-    gem.add_development_dependency "deep_merge", ">= 0.1.0"
+    gem.add_dependency "mysql", ">= 0"
+    gem.add_dependency "net-dns", ">= 0.1"
+    gem.add_dependency "deep_merge", ">= 0.1.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
