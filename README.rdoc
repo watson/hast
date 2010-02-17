@@ -25,29 +25,24 @@ config.yml.example as a template.
   in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Gem requirements
-
-* mysql
-* net-dns
-
 == Usage 
 
-hast config-file [options]
+  hast config-file [options]
 
 For help use: hast -h
 
-== Options
+=== Options
 
--h, --help                Displays help message
--v, --version             Display version
--g, --generate-config     Output a config file template (pipe it to a
-                          file for easy use: hast -g > config.yml)
--q, --no-dns              Do not lookup any domain names or MX records
--y, --yaml                Output as YAML (usefull if you want to pipe:
-                          bau.rb > domains.yml)
--c, --domain-cache FILE   Get the domains from a YAML file
+  -h, --help                Displays help message
+  -v, --version             Display version
+  -g, --generate-config     Output a config file template (pipe it to a
+                            file for easy use: hast -g > config.yml)
+  -q, --no-dns              Do not lookup any domain names or MX records
+  -y, --yaml                Output as YAML (usefull if you want to pipe:
+                            bau.rb > domains.yml)
+  -c, --domain-cache FILE   Get the domains from a YAML file
 
-== Examples
+=== Examples
 
 Generate a human-readable report:
   hast config.yml
