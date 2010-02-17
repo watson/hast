@@ -11,8 +11,9 @@ This is important for finding "dead" domains where the domain either
 doesn't exist anymore or where the owner have moved it to another
 hosting provider.
 
-Before you can use HAST, you need to setup a config.yml file. Use
-config.yml.example as a template.
+Before you can use HAST, you need to setup a config.yml file. Run 'hast
+--generate-config > config.yml' to create a sample config file that you
+can modify.
 
 == Note on Patches/Pull Requests
  

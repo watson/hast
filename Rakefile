@@ -18,8 +18,9 @@ begin
       doesn't exist anymore or where the owner have moved it to another
       hosting provider.
 
-      Before you can use HAST, you need to setup a config.yml file. Use
-      config.yml.example as a template.
+      Before you can use HAST, you need to setup a config.yml file. Run 'hast
+      --generate-config > config.yml' to create a sample config file that you
+      can modify.
     EOF
     gem.email = "w@tson.dk"
     gem.homepage = "http://github.com/watson/hast"
