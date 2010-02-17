@@ -32,32 +32,34 @@ config.yml.example as a template.
 
 == Usage 
 
-hast [options]
+hast config-file [options]
 
 For help use: hast -h
 
 == Options
 
 -h, --help                Displays help message
--v, --version             Display the version, then exit
+-v, --version             Display version
+-g, --generate-config     Output a config file template (pipe it to a
+                          file for easy use: hast -g > config.yml)
 -q, --no-dns              Do not lookup any domain names or MX records
--y, --yaml                Output as YAML (usefull if you want to 
-                          'bau.rb > domains.yml')
+-y, --yaml                Output as YAML (usefull if you want to pipe:
+                          bau.rb > domains.yml)
 -c, --domain-cache FILE   Get the domains from a YAML file
 
 == Examples
 
 Generate a human-readable report:
-  ruby hast.rb
+  hast config.yml
 
 Do not perfom DNS lookups:
-  ruby hast.rb -q
+  hast config.yml -q
 
 Do not perfom DNS lookups and genereate a YAML file with the result:
-  ruby hast.rb -yq > domains.yml
+  hast config.yml -yq > domains.yml
 
 Load the domains to check from a YAML file:
-  ruby hast.rb -c domains.yml
+  hast config.yml -c domains.yml
 
 == Copyright
 

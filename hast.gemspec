@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Thomas Watson Steen"]
-  s.date = %q{2010-02-16}
+  s.date = %q{2010-02-17}
   s.default_executable = %q{hast}
   s.description = %q{      HAST stands for 'Hosting Account Status Tool'.
 
@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/hast",
      "config.yml.example",
+     "hast.gemspec",
      "lib/hast.rb",
      "lib/hast/apache.rb",
      "lib/hast/postfix.rb",
@@ -58,13 +59,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<mysql>, [">= 0"])
       s.add_development_dependency(%q<net-dns>, [">= 0"])
+      s.add_development_dependency(%q<deep_merge>, [">= 0.1.0"])
     else
       s.add_dependency(%q<mysql>, [">= 0"])
       s.add_dependency(%q<net-dns>, [">= 0"])
+      s.add_dependency(%q<deep_merge>, [">= 0.1.0"])
     end
   else
     s.add_dependency(%q<mysql>, [">= 0"])
     s.add_dependency(%q<net-dns>, [">= 0"])
+    s.add_dependency(%q<deep_merge>, [">= 0.1.0"])
   end
 end
 

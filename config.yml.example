@@ -1,14 +1,58 @@
 dns:
+  # The nameserver used when looking op domains.
+  #
+  # In most cases you can just leave this as 8.8.8.8 which is the
+  # primary Google nameserver.
+  #
   nameserver: '8.8.8.8'
+
 apache:
+  # The IP address of your Apache webserver.
+  #
+  # This is the one you expect all of your domians to resolve to.
+  #
   ip: '192.168.0.1'
+
+  # The location of the main Apache config file.
+  #
+  # HAST will automatically load any depended configuration files that
+  # are included using the Apache 'Include' option.
+  #
   config: '/usr/local/etc/apache22/httpd.conf'
+
+  # The configuration files specified using the Apache 'Include' option
+  # might not be specified using the absolute path. Use this option to
+  # prepend a path to the 'Include'-values.
+  #
   base_path: '/usr/local'
-  mass_virtual_hosting_path: '/usr/local/www/apache22/vhosts/'
+
+  # Enable this option to make HAST seach for domains in a directory as
+  # well as in the Apache configuration files.
+  #
+  # The names of all entries in this directory will be treated as
+  # domain names. This can be needed when the hosting solution involves
+  # Mass-Virtual-Hosting where the Apache Virtual-Hosts are created
+  # runtime by just adding directories to a specific folder on the
+  # filesystem.
+  #
+  #extra_domains_directory: '/usr/local/www/apache22/vhosts/'
+
 postfix:
+  # The IP address of your Postfix mail-server.
+  #
+  # This is the one you expect all of your MX records to resolve to.
+  #
   ip: '192.168.0.2'
+
+  # HAST needs access to the Postfix MySQL database to figure out which
+  # domains you are hosting mail for.
+  #
+  # Use theese options to specify the servername (host), the database
+  # user and password and finally the name of the database used by
+  # Postfix.
+  #
   mysql:
     host: localhost
-    user: root
+    user: postfix
     password: secret
     database: postfix

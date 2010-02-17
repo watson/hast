@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'optparse'
 require 'yaml'
-require 'rdoc/usage'
-require 'lib/hast/apache'
-require 'lib/hast/postfix'
-require 'lib/hast/verifier'
+require 'deep_merge'
+require 'hast/apache'
+require 'hast/postfix'
+require 'hast/verifier'
 
 class Hast
   NAME = "HAST - Hosting Account Status Tool"
@@ -12,8 +12,8 @@ class Hast
   attr_reader :config
 
   def initialize
-    load_config
     parse_command_line_args
+    load_config
     load_domains
     verify_domains
   end
@@ -36,30 +36,58 @@ class Hast
 
   def output_version
     version = nil
-    File.open('VERSION') { |f| version = f.gets }
+    File.open(File.dirname(__FILE__) + '/../VERSION') { |f| version = f.gets }
     puts "#{NAME} v#{version}"
   end
 
-  def output_help
-    RDoc::usage
+  def output_config_template
+    File.open(File.dirname(__FILE__) + '/../config.yml.example') { |f| puts f.readlines }
   end
 
   def load_config
-    @config = YAML::load(File.open('config.yml'))
+    unless File.exists? @config_file
+      puts "ERROR: Could not find config file '#{@config_file}'... aborting"
+      exit 1
+    end
+
+    @config.deep_merge! YAML::load(File.open(@config_file))
     unless @config['apache']['base_path'].empty? && @config['apache']['base_path'] !~ /\/$/
       @config['apache']['base_path'] += '/'
     end
-    @config['output'] ||= :stdout
   end
 
   def parse_command_line_args
-    OptionParser.new do |opts|
-      opts.on('-v', '--version')           { output_version; exit 0 }
-      opts.on('-h', '--help')              { output_help }
-      opts.on('-q', '--no-dns')            { @config['dns']['disable'] = true }
-      opts.on('-y', '--yaml')              { @config['output'] = :yaml }
-      opts.on('-c', '--domain-cache FILE') { |file| @config['domain_cache'] = file }
-    end.parse!
+    @config = {'output' => :stdout}
+    options = OptionParser.new do |opts|
+      opts.banner = "Usage: hast config-file [options]"
+      opts.separator ''
+      opts.separator 'Specific options:'
+      opts.on('-v', '--version',
+              'Show this message')                                      { output_version; exit 0 }
+      opts.on('-h', '--help',
+              'Show version')                                           { puts opts; exit 0 }
+      opts.on('-g', '--generate-config',
+              'Output a config file template',
+              '(pipe it to a file for easy use: hast -g > config.yml)') { output_config_template; exit 0 }
+      opts.on('-q', '--no-dns',
+              'Do not lookup any domain names or MX records')           { @config['dns'] = { 'disable' => true } }
+      opts.on('-y', '--yaml',
+              'Output as YAML',
+              '(usefull if you want to pipe: bau.rb > domains.yml)')    { @config['output'] = :yaml }
+      opts.on('-c', '--domain-cache FILE',
+              'Get the domains from a YAML file')                       { |file| @config['domain_cache'] = file }
+      opts.separator ''
+      opts.separator 'See http://github.com/watson/hast for details'
+    end
+    options.parse!
+
+    unless @config_file = ARGV.delete_at(0)
+      puts "ERROR: You must supply a config file as the first argument!"
+      puts "       To generate a config file template use the -g argument"
+      puts
+      puts options
+      exit 1
+    end
   end
 
   def load_domains

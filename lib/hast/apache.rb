@@ -8,7 +8,7 @@ module HAST
       config_files = find_config_files(@config['apache']['config'])
 
       domains = find_domains_in_config(config_files)
-      domains << find_mass_virtual_hosting_domains if @config['apache']['mass_virtual_hosting_path']
+      domains << find_extra_domains if @config['apache']['extra_domains_directory']
       domains.flatten!
       domains.uniq!
 
@@ -48,9 +48,9 @@ module HAST
       domains.flatten.uniq
     end
 
-    def find_mass_virtual_hosting_domains
+    def find_extra_domains
       domains = []
-      Dir.foreach(@config['apache']['mass_virtual_hosting_path']) do |entry|
+      Dir.foreach(@config['apache']['extra_domains_directory']) do |entry|
         next if entry =~ /^\.\.?$/
         domains << entry
       end
