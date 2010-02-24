@@ -113,7 +113,7 @@ class Hast
       when :inactive
         'Inactive (no record)'
       when :unknown
-        'Status ukendt'
+        'Status unknown'
       when :other
         "Inactive (unexpected ip#{ips.size > 1 ? '\'s' : ''}: #{ips.join(', ')})"
       end
