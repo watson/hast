@@ -41,7 +41,7 @@ class Hast
   end
 
   def output_config_template
-    File.open(File.dirname(__FILE__) + '/../config.yml.example') { |f| puts f.readlines }
+    File.open(File.dirname(__FILE__) + '/../config.yml.template') { |f| puts f.readlines }
   end
 
   def load_config
@@ -69,7 +69,7 @@ class Hast
       opts.on('-g', '--generate-config',
               'Output a config file template',
               '(pipe it to a file for easy use: hast -g > config.yml)') { output_config_template; exit 0 }
-      opts.on('-q', '--no-dns',
+      opts.on('-q', '--disable-lookup',
               'Do not lookup any domain names or MX records')           { @config['dns'] = { 'disable' => true } }
       opts.on('-y', '--yaml',
               'Output as YAML',

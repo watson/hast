@@ -1,5 +1,3 @@
-require 'mysql'
-
 module HAST
   class Postfix
     attr_reader :domains
@@ -8,10 +6,33 @@ module HAST
       @config = config
       @domains = []
 
-      dbh = Mysql.real_connect(@config['postfix']['mysql']['host'],
-                               @config['postfix']['mysql']['user'],
-                               @config['postfix']['mysql']['password'],
-                               @config['postfix']['mysql']['database'])
+      case @config['postfix']['method']
+      when 'file'
+        vhost_file
+      when 'database'
+        mysql
+      when nil
+        raise "ERROR: Postfix method not specified!"
+      else
+        raise "ERROR: Unknown Postfix method '#{@config['postfix']['method']}'"
+      end
+    end
+
+    private
+
+    def vhost_file
+      File.open(@config['postfix']['vhost_file']) do |f|
+        @domains = f.readlines.compact.map{ |line| line.chomp }.reject{ |line| line.empty? }
+      end
+    end
+
+    def mysql
+      require 'mysql'
+
+      dbh = Mysql.real_connect(@config['postfix']['database']['host'],
+                               @config['postfix']['database']['user'],
+                               @config['postfix']['database']['password'],
+                               @config['postfix']['database']['database'])
 
       results = dbh.query('SELECT domain FROM domain')
       results.each do |row|

@@ -44,6 +44,21 @@ postfix:
   #
   ip: '192.168.0.2'
 
+  # Specify the method used for finding Postfix domains. Can either be
+  # 'file' for using a virtual host file or 'database' for usin a MySQL
+  # database.
+  #
+  # Note that if using the database-method, you need the mysql gem. To
+  # install run 'gem install mysql'.
+  #
+  method: file
+
+  # The path for the Postfix vhost file
+  #
+  vhost_file: '/etc/postfix/vhosts.txt'
+
+  # Enable this group when using the Postfix method 'database'
+  #
   # HAST needs access to the Postfix MySQL database to figure out which
   # domains you are hosting mail for.
   #
@@ -51,8 +66,8 @@ postfix:
   # user and password and finally the name of the database used by
   # Postfix.
   #
-  mysql:
-    host: localhost
-    user: postfix
-    password: secret
-    database: postfix
+  #database:
+  #  host: localhost
+  #  user: postfix
+  #  password: secret
+  #  database: postfix

@@ -3,9 +3,9 @@
 HAST stands for 'Hosting Account Status Tool'.
 
 HAST is a tool for fetching domains from Apache configuration files and
-from the Postfix database on a hosting server environment. It will then
-run a report, checking the DNS records for each domain to see if they
-match your server.
+from Postfix on a hosting server environment. It will then run a
+report, checking the DNS records for each domain to see if they match
+your server.
 
 This is important for finding "dead" domains where the domain either
 doesn't exist anymore or where the owner have moved it to another
@@ -38,7 +38,7 @@ For help use: hast -h
   -v, --version             Display version
   -g, --generate-config     Output a config file template (pipe it to a
                             file for easy use: hast -g > config.yml)
-  -q, --no-dns              Do not lookup any domain names or MX records
+  -q, --disable-lookup      Do not lookup any domain names or MX records
   -y, --yaml                Output as YAML (usefull if you want to pipe:
                             bau.rb > domains.yml)
   -c, --domain-cache FILE   Get the domains from a YAML file

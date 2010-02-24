@@ -1,0 +1,21 @@
+Master branch
+===============================================================================
+
+Added support for finding Postfix domains in a config file instead of a
+database.
+
+Note that the mysql gem therefore isn't a gem dependency anymore. So if you
+plan to use the Postfix database-method, you must manually install the mysql
+gem.
+
+
+Version 0.2.2 - 2010-02-16
+===============================================================================
+
+Added gem dependencies
+
+
+Version 0.2.1 - 2010-02-16
+===============================================================================
+
+First version released
