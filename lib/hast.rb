@@ -63,19 +63,19 @@ class Hast
       opts.separator ''
       opts.separator 'Specific options:'
       opts.on('-v', '--version',
-              'Show this message')                                      { output_version; exit 0 }
+              'Show this message')                                        { output_version; exit 0 }
       opts.on('-h', '--help',
-              'Show version')                                           { puts opts; exit 0 }
+              'Show version')                                             { puts opts; exit 0 }
       opts.on('-g', '--generate-config',
               'Output a config file template',
-              '(pipe it to a file for easy use: hast -g > config.yml)') { output_config_template; exit 0 }
+              '(pipe it to a file for easy use: hast -g > config.yml)')   { output_config_template; exit 0 }
       opts.on('-q', '--disable-lookup',
-              'Do not lookup any domain names or MX records')           { @config['dns'] = { 'disable' => true } }
+              'Do not lookup any domain names or MX records')             { @config['dns'] = { 'disable' => true } }
       opts.on('-y', '--yaml',
               'Output as YAML',
-              '(usefull if you want to pipe: bau.rb > domains.yml)')    { @config['output'] = :yaml }
+              '(pipe it to a file for easy use: hast -y > domains.yml)')  { @config['output'] = :yaml }
       opts.on('-c', '--domain-cache FILE',
-              'Get the domains from a YAML file')                       { |file| @config['domain_cache'] = file }
+              'Get the domains from a YAML file')                         { |file| @config['domain_cache'] = file }
       opts.separator ''
       opts.separator 'See http://github.com/watson/hast for details'
     end
