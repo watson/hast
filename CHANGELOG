@@ -1,4 +1,10 @@
-Master branch
+Version 0.3.1 - 2010-02-25
+===============================================================================
+
+Fixed error en documentation
+
+
+Version 0.3.0 - 2010-02-24
 ===============================================================================
 
 Added support for finding Postfix domains in a config file instead of a
