@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Thomas Watson Steen"]
-  s.date = %q{2010-02-25}
+  s.date = %q{2010-04-22}
   s.default_executable = %q{hast}
   s.description = %q{      HAST stands for 'Hosting Account Status Tool'.
 
