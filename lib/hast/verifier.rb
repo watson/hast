@@ -15,7 +15,7 @@ module HAST
       @type = type
       @output_block = output_block
       @dns = Net::DNS::Resolver.new
-      @dns.nameservers = @config['dns']['nameserver']
+      @dns.nameservers = [@config['dns']['primary'], @config['dns']['secondary']].compact
     end
 
     def verify_domains
@@ -57,7 +57,11 @@ module HAST
 
     def get_server_ips(domain)
       ips = []
-      @dns.query(domain).each_address { |ip| ips << ip.to_s }
+      begin
+        @dns.query(domain).each_address { |ip| ips << ip.to_s }
+      rescue Net::DNS::Resolver::NoResponseError
+        ips = nil
+      end
       ips
     end
 
